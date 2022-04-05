@@ -1,7 +1,7 @@
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa' 
 import React, { useEffect, useContext } from 'react';
 import { useParams  } from 'react-router-dom';
- import GithubContext from '../context/githubContext';
+import GithubContext from '../context/githubContext';
 import Spinner from './../layout/Spinner';
 import { Link } from 'react-router-dom';
 import Repos from '../repos/repos';
@@ -12,11 +12,11 @@ const User=()=>{
 
     const params=useParams()
   useEffect(() => {
+    dispatch({ type: "SET_LOADING" })
     const getData = async () => {
-      dispatch({ type: "SET_LOADING" })
       const res=await getUserAndRepos(params.login)
 
-      dispatch({type:'GET_USER_AND_REPOS',payload:{user:res.user,repos:res.repos}})
+      dispatch({type:'GET_USER_AND_REPOS',payload:res})
     }
     getData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
